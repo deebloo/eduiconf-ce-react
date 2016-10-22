@@ -1,3 +1,5 @@
+import '@webcomponents/custom-elements/custom-elements.min'
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
