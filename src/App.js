@@ -1,26 +1,30 @@
 import './edui-name-card';
 
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 
-class App extends Component {
-  componentDidMount() {
-    const card = this.nameCard;
-
-    card.addEventListener('greet', (e) => {
-      alert(e.detail.firstName + ' Says Hello!');
-    });
-
-    card.user = {
+class App extends React.Component {
+  get userData() {
+    return {
       firstName: 'Danny',
       lastName: 'Blue',
       company: 'LiveSafe'
     }
-  }  
+  }
+
+  componentDidMount() {
+    this.userCard.user = this.userData;
+
+    this.userCard.addEventListener('greet', (e) => {
+      alert(e.detail.firstName + ' Says Hello');
+    });
+  }
 
   render() {
     return (
-      <edui-name-card ref={(card) => this.nameCard = card}></edui-name-card>
+      <div>
+        <edui-name-card ref={card => this.userCard = card}></edui-name-card>
+      </div>
     );
   }
 }

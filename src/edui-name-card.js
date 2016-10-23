@@ -1,36 +1,28 @@
 class EduiNameCard extends HTMLElement {
-  set user(name) {
-    this._name = name;
+  set user(user) {
+    this._user = user;
+
     this.render();
   }
 
   get user() {
-    return this._name || {};
+    return this._user;
   }
 
-  get handlers() {
-    return {
-      BUTTON: () => {
-        const cardEvent = new CustomEvent('greet', {
-          detail: this.user
-        });
-        
-        this.dispatchEvent(cardEvent);
-      }
-    }
-  }
-  
   constructor() {
     super();
 
-    this.addEventListener('click', e => {
-      const tag = e.target.tagName;
-      const handler = this.handlers[tag];
+    this.addEventListener('click', (e) => {
+      const target = e.target.tagName;
 
-      if(handler) {
-        handler();
+      if(target === 'BUTTON') {
+        const evtObj = new CustomEvent('greet', {
+          detail: this.user
+        });
+
+        this.dispatchEvent(evtObj);
       }
-    })
+    });
   }
 
   render() {
